@@ -1,5 +1,7 @@
 import tkinter as tk
 import keyboard
+import datetime
+import subprocess
 
 # functie care raspunde la mesaj
 def raspunde(event=None):
@@ -35,6 +37,21 @@ def raspunde(event=None):
     elif mesaj == "volum down":
         keyboard.send("volume down")
         raspuns = "Volum mai mic."
+    elif mesaj == "cat e ceasul":
+        raspuns = "Cat ti-e nasul hahaha =]"
+    elif mesaj == "serios cat e ceasul":
+        acum = datetime.datetime.now()
+        ceas = acum.strftime("%H:%M")
+        raspuns = f"Este ora {ceas}."
+    elif mesaj == "deschide spotify":
+        subprocess.Popen("start spotify:", shell=True)
+        raspuns = "Deschid Spotify."
+    elif mesaj == "stay on top":
+        root.attributes("-topmost", True)
+        raspuns = "Fereastra va rămâne mereu în față."
+    elif mesaj == "nu mai sta in fata":
+        root.attributes("-topmost", False)
+        raspuns = "Fereastra nu mai este blocată în față."
     elif mesaj == "exit":
         raspuns = "La revedere!"
         chat.insert(tk.END, f"Bot: {raspuns}\n", "bot")
@@ -51,6 +68,7 @@ def raspunde(event=None):
 # fereastra principala
 root = tk.Tk()
 root.title("Chatbot Dark Mode")
+root.attributes("-topmost", True)
 
 # culori
 bg_color = "#121212"
